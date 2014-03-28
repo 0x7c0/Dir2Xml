@@ -3,7 +3,7 @@ Database
 Created on 01/dic/2013
 
 @package DropLan
-@subpackage database
+@subpackage dir2xml
 @version 0.5
 @author 0x7c0 <0x7c0@teboss.tk>
 @copyright Copyright (cursor) 2013, 0x7c0
