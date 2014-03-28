@@ -13,6 +13,14 @@ Created on 27/mar/2014
 '''
 
 
+# check version
+from sys import version_info
+if(version_info[0] < 3):
+    print('must use Python 3 or greater')
+    quit()
+del version_info
+
+
 try:
     from time import time
     from argparse import ArgumentParser, ArgumentTypeError
