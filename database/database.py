@@ -1,6 +1,6 @@
 '''
 Database
-Created on 01/dic/2013
+Created on 27/mar/2014
 
 @package DropLan
 @subpackage dir2xml
@@ -16,12 +16,12 @@ try:
     from time import time
     from sqlite3 import connect, DatabaseError, IntegrityError
     # personal
-    from database.xml import Xml
     from database.iterdir import IterDir
     from database.iterfile import IterFile
     from module.utility.utility import u_str_split, \
         u_file_copy, u_file_set_info, \
         u_dir_info, u_dir_join, u_dir_parent, u_dir_child, u_dir_abs
+    from database.xml import Xml
 except ImportError as error:
     print('In %s cannot load required libraries: %s!' \
         % (__name__, error))
@@ -93,8 +93,11 @@ class DB(Xml):
         @return: void
         '''
 
-        if(not self.init_controll()):
+        res = self.init_controll()
+        if(res == None):    # not installed
             self.__init_install()
+        elif(res == False):
+            raise Exception    # different db and base
 
     #==========================================================================
     # init
@@ -125,8 +128,24 @@ class DB(Xml):
                 return True
             else:
                 return False
+
         except DatabaseError:
+            return None
+        except TypeError:
             return False
+
+    def init_papa(self, dad):
+        '''
+        change father dir
+
+        @param string dad:    new father dir
+        @return: void
+        '''
+
+        dad = u_dir_child(dad)
+        self.__exec('UPDATE DIR SET Name=? WHERE Id=?;', (str(dad), 1))
+        self.__conn.commit()
+        return
 
     def __init_install(self):
         '''
@@ -171,14 +190,6 @@ class DB(Xml):
                             UNIQUE(Parent, Name)
                         );
                         ''')
-#         self.__exec( 'CREATE VIEW V_LIN_DIR  AS SELECT Id,Name,Parent,\
-# Atime,Mtime FROM DIR WHERE Lin=0 AND Obsolete=0;' )    # view sincro dir
-#         self.__exec( 'CREATE VIEW V_LIN_FILE AS SELECT Id,Name,Parent,\
-# Size,Atime,Mtime,Hash FROM FILE WHERE Lin=0 AND Obsolete=0;' )    # view file
-#         self.__exec( 'CREATE VIEW V_DEL_DIR  AS SELECT Id,Name,Parent\
-#  FROM DIR WHERE Del=1 AND Obsolete=0;' )    # view delete dir
-#         self.__exec( 'CREATE VIEW V_DEL_FILE AS SELECT Id,Name,Parent\
-#  FROM FILE WHERE Del=1 AND Obsolete=0;' )    # view delete file
 
         self._add_single((self.base, 0), u_dir_info(self._dir), False)
 

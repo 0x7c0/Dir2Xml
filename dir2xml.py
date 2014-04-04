@@ -13,22 +13,21 @@ Created on 27/mar/2014
 '''
 
 
-# check version
-from sys import version_info
-if(version_info[0] < 3):
-    print('must use Python 3 or greater')
-    quit()
-del version_info
-
-
 try:
+    # check version
+    from sys import version_info
+    if(version_info[0] < 3):
+        print('must use Python 3 or greater')
+        quit()
+    del version_info
+    # import
     from time import time
     from argparse import ArgumentParser, ArgumentTypeError
     # personal
-    from database.database import DB
     from module.utility.utility import u_dir_abs, u_dir_exists, \
-                                        u_file_exists, u_user_input
+        u_file_exists, u_user_input
     from module.utility.simple import s_ut_crono, s_temporary_db
+    from database.database import DB
 except ImportError as error:
     print('In %s cannot load required libraries: %s!' \
         % (__name__, error))

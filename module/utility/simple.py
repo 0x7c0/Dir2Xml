@@ -1,12 +1,12 @@
 '''
-Database
 Common simple functions
+Created on 27/mar/2014
 
 @package Dir2Xml
 @subpackage database
 @version 0.5
 @author 0x7c0 <0x7c0@teboss.tk>
-@copyright Copyright (cursor) 2013, 0x7c0
+@copyright Copyright (c) 2013, 0x7c0
 @license http://www.gnu.org/licenses/gpl.html GPL v3 License
 '''
 

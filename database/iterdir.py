@@ -1,6 +1,6 @@
 '''
 Iterator for directories
-Created on 01/dic/2013
+Created on 27/mar/2014
 
 @package Dir2Xml
 @subpackage database
