@@ -1,6 +1,6 @@
 # Dir2Xml
 
-[![Build Status](https://travis-ci.org/hex7c0/Dir2Xml.svg?branch=master)](https://travis-ci.org/hex7c0/Dir2Xml)
+[![Build Status](https://travis-ci.org/hex7c0/Dir2Xmlpy.svg?branch=master)](https://travis-ci.org/hex7c0/Dir2Xmlpy)
 
 ### generating XML file that represents a directory structure
 
